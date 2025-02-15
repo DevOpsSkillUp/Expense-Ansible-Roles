@@ -1,0 +1,35 @@
+tasks:
+  - name: Install Mysql Library
+    ansible.builtin.pip:     # pip is a package manager for python
+      name: "{{item}}"          # A MySQL module is required: for Python 2.7 either PyMySQL, or MySQL-python
+      executable: pip3.9     # pip3.9 is the executable file for pip
+    loop:                    # loop is used to run the same task multiple times
+      - PyMySQL
+      - cryptography           # cryptography is a library for secure communication between two parties over the internet (Exception message: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods)
+
+  - name: Install MySql
+    ansible.builtin.package:   # here we ca use dnf/yum/apt but we are using ansible.builtin.package will fetch automatically based on the OS. In real time we can use dnf directly Mostly OS is specific.
+      name: mysql-server       # name of the package
+      state: present           # present means it will install the package if not installed
+
+  - name: Start and enable the service
+    ansible.builtin.service:
+      name: mysqld     # name of the service
+      state: started   # started means it will start the service
+      enabled: yes     # enabled means it will start the service on boot time
+
+  - name: Connect to mysql server                   # create a record in route 53 for mysql server with private IP
+    community.mysql.mysql_info:                     # mysql_info is a module to connect to mysql server
+      login_user:   "{{ mysql_login_user }}"        # login user
+      login_password: "{{ mysql_login_password }}"  # login password
+      login_host: "{{ mysql_login_host }}"          # this is record in route 53 for mysql server with private IP
+    register: mysql_data                            # store the output in mysql_data
+    ignore_errors: true                             # ignore the errors if any failure
+
+  - name: Checking the mysql info
+    ansible.builtin.debug:
+      msg: "Mysql Info{{ mysql_data }}"        # print the mysql info
+  
+  - name: Set the root password
+    ansible.builtin.command:  "mysql_secure_installation --set-root-pass ExpenseApp@1"  # command module is used to run the command
+    when: mysql_data.failed is true                                                     # when mysql_info is failed
