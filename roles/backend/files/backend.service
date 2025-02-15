@@ -3,7 +3,7 @@ Description = Backend Service
 
 [Service]
 User=expense
-Environment=DB_HOST="mysql.devops-project.site"  # this used for hardcode the value 
+Environment=DB_HOST="mysql.devops-project.site"  # this used for hardcode the value  this or j2 any one can based on requirement
 ExecStart=/bin/node /app/index.js
 SyslogIdentifier=backend
 

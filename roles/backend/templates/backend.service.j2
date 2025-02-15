@@ -3,7 +3,7 @@ Description = Backend Service
 
 [Service]
 User=expense
-Environment=DB_HOST="{{ mysql_login_host }}"    # This is a variable that will be replaced by the value of mysql_login_host in the playbook  file  dynamically and not hardcoded
+Environment=DB_HOST="{{ mysql_login_host }}"    # This is a variable that will be replaced by the value of mysql_login_host in the playbook  file  dynamically and not hardcoded, j2 is the standard extension for if u have variables in the file
 ExecStart=/bin/node /app/index.js
 SyslogIdentifier=backend
 
