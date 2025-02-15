@@ -1,4 +1,3 @@
-
 - name: install the nginx server
   ansible.builtin.package:    
     name: nginx
@@ -34,7 +33,10 @@
 
 - name: copy the expense config
   ansible.builtin.copy:
-    src: expense.conf.j2                  # if any changes in the config file then only it should restart the nginx server, if no changes then no need to restart the nginx server
+    src: expense.conf
     dest: /etc/nginx/default.d/expense.conf
-  notify: 
-  - Restart nginx
+
+- name: Restart the nginx server
+  ansible.builtin.service:
+    name: nginx
+    state: restarted
