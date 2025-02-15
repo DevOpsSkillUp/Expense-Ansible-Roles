@@ -36,4 +36,5 @@
   ansible.builtin.template:
     src: expense.conf.j2                   #if anyconf in the conf file then only restart the nginx server(change to yellow then only restart), if no change then no need to restart
     dest: /etc/nginx/default.d/expense.conf
-  notify: Restart nginx
+  notify: 
+  - Restart nginx
