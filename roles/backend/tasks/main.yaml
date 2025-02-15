@@ -1,5 +1,5 @@
 - name: Disable the package
-    ansible.builtin.command: dnf module disable nodejs -y    # Not idempotent every time it will changing the state to yellow color in the playbook
+  ansible.builtin.command: dnf module disable nodejs -y    # Not idempotent every time it will changing the state to yellow color in the playbook
   
 - name: enable nodejs 20
   ansible.builtin.command: dnf module enable nodejs:20 -y
