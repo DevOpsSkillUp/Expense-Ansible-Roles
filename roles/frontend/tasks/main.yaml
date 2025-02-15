@@ -1,6 +1,6 @@
 
 - name: install the nginx server
-  ansible.builtin.package:    
+  ansible.builtin.dnfs:    
     name: nginx
     state: present
 
