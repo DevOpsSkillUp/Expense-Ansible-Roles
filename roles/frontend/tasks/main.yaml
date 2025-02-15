@@ -3,11 +3,6 @@
     name: nginx
     state: present
 
-- name: start and enable the nginx server
-  ansible.builtin.service:
-    name: nginx
-    state: started
-    enabled: yes
 
 - name: delete the html files
   ansible.builtin.file:
