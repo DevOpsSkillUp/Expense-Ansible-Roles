@@ -37,8 +37,8 @@
     path: /app
 
 - name: Copy the backend service
-  ansible.builtin.copy:
-    src: backend.service
+  ansible.builtin.template:   #it will search in the templates folder in the role
+    src: backend.service.j2
     dest: /etc/systemd/system/backend.service
     
 - name: Install the pip package

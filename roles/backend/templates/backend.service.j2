@@ -1,0 +1,11 @@
+[Unit]
+Description = Backend Service
+
+[Service]
+User=expense
+Environment=DB_HOST="{{ mysql_login_host }}"    # This is a variable that will be replaced by the value of mysql_login_host in the playbook  file  dynamically and not hardcoded
+ExecStart=/bin/node /app/index.js
+SyslogIdentifier=backend
+
+[Install]
+WantedBy=multi-user.target
