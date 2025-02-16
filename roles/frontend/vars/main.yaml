@@ -1,1 +1,3 @@
 BACKEND_HOST: backend.devops-project.site
+App_Location: /usr/share/nginx/html/
+Component: frontend
