@@ -6,7 +6,7 @@
 - name: include from commons 
   include_role:
     name: common
-    #tasks_from: main   #defalut it will be taken if u have different name(main -> home, something) have to write that line
+    tasks_from: main   #defalut it will be taken if u have different name(main -> home, something) have to write that line
 
 # - name: delete the html files
 #   ansible.builtin.file:
