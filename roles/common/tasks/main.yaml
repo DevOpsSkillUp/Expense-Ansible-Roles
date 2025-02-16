@@ -10,5 +10,5 @@
 
 - name: Download the files
   ansible.builtin.unarchive:
-    scr: https://expense-builds.s3.us-east-1.amazonaws.com/expense-{{ component }}-v2.zip
+    scr: "https://expense-builds.s3.us-east-1.amazonaws.com/expense-{{ component }}-v2.zip"
     dest: "{{ App_Location }}"
