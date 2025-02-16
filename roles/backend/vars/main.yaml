@@ -2,4 +2,4 @@ mysql_login_host: mysql.devops-project.site
 mysql_login_user: root                         # login user
 mysql_login_password: ExpenseApp@1           # login password
 App_Location: /app
-component: backend
+Component: backend
