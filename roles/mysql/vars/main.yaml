@@ -1,3 +1,3 @@
 mysql_login_user: root                         # login user
-#mysql_login_password: ExpenseApp@1             # login password getting password from vault
+mysql_login_password: ExpenseApp@1             # login password getting password from vault
 mysql_login_host: mysql.devops-project.site
