@@ -21,7 +21,7 @@
 - name: Connect to mysql server                   # create a record in route 53 for mysql server with private IP
   community.mysql.mysql_info:                     # mysql_info is a module to connect to mysql server
     login_user:   "{{ mysql_login_user }}"        # login user
-    login_password: "{{ mysql_login_password }}"  # login password
+    login_password: "{{ lookup('amazon.aws.aws_ssm', '/expense/mysql/mysql_root_password', decrypt=true ) }}"  # login password
     login_host: "{{ mysql_login_host }}"          # this is record in route 53 for mysql server with private IP
   register: mysql_data                            # store the output in mysql_data
   ignore_errors: true                             # ignore the errors if any failure
@@ -31,5 +31,5 @@
     msg: "Mysql Info{{ mysql_data }}"        # print the mysql info
 
 - name: Set the root password
-  ansible.builtin.command:  "mysql_secure_installation --set-root-pass ExpenseApp@1"  # command module is used to run the command
+  ansible.builtin.command:  "mysql_secure_installation --set-root-pass {{ lookup('amazon.aws.aws_ssm', '/expense/mysql/mysql_root_password', decrypt=true ) }}"  # command module is used to run the command
   when: mysql_data.failed is true                                                     # when mysql_info is failed
